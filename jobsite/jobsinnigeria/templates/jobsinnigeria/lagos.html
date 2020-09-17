@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ Jobs Available in Lagos
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-sm col-md col-lg">
+                <h4 class="text-center">All jobs in Lagos</h4>
+            </div>
+        </div>
+    </div>
+
+    {% for job in lagos %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ job.job_title }}</a>
+                    <ul>
+                        <li>Company: {{ job.company_name }}</li>
+                        <li>Job type: {{ job.job_type }}</li>
+                        <li>Qualification: {{ job.job_qualifications }}</li>
+                        <li>Location: {{ job.job_location }}</li>
+                        <li>{{ job.date_posted }}</li>
+                        <li>By: {{ job.job_author }}</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}

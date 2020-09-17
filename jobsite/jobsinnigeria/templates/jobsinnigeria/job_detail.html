@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+       <article class="media content-section">
+           <div class="media-body">
+               <div class="article-metadata">
+                   <a class="mr-2" href="{% url 'home' %}">{{job.job_author}}</a>
+                   <small class="text-muted"> Posted on {{job.date_posted|date:"F d, Y"}}</small>
+               </div>
+               <h5 class="article-title">{{job.job_title}}</h5>
+               <p class="article-content">{{ job.about_the_company|safe }}</p>
+               <p class="article-content"><strong>Details </strong><br>
+               
+               
+
+               <a class="article-content">Job Experience  : {{job.job_experience}}</a>
+
+               <p class="article-content"><strong>Description </strong> :<br> <br>{{ job.job_description|safe }}</p>
+               <p class="article-content"><strong>{{job.competency_title}} </strong> <br> <br>{{job.competency}}</p>
+               <strong>Method Of Application</strong> :<br> <br><a href={{ job.website }}>{{ job.website }}</a>
+               <br>
+           </div>
+       </article>
+
+{% endblock %}
+
+
+
+    <!-- 
+    <a class="article-content">Job Duration  : <a href="#">{{job.job_type}}</a></a>
+               <a class="article-content">Job Location  : <a href="#">{{job.job_location.title}}</a></a>
+               <a class="article-content">Job Qualification  : <a href="#">{{job.job_qualification.title}}</a> </a>
+    -->

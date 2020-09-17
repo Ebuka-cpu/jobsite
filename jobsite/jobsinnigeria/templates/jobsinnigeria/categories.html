@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Jobs categories
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-sm col-md col-lg">
+                <h4 class="text-center">All available jobs by State</h4>
+            </div>
+        </div>
+    </div>
+
+    {% for job in categories %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                        <h5>State: {{ job.category.name }}</h5>
+                    <a class="mr-2" href="{% url 'job_detail' job.slug %}">{{ job.job_title }}</a>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
+
+
+<!--
+
+<small class="text-muted">Posted on {{job.date_posted|date:"F d, Y"}}</small>
+</div>
+<h5><a class="article-title" href="{% url 'job_detail' job.slug %}">{{job.job_title}} </a></h5>
+<p class="article-content">{{job.about_the_company|slice:"200"}} <a class="article-title" href=
+        "{% url 'job_detail' job.slug %}">show details...</a>
+    
+        -->

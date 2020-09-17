@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Abuja Available jobs
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+        <div class="row">
+            <div class="col col-sm col-md col-lg">
+                <h4 class="text-center">All jobs in Abuja</h4>
+            </div>
+        </div>
+    </div>
+
+    {% for job in abuja %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ job.job_title }}</a>
+                    <ul>
+                        <li>Company: {{ job.company_name }}</li>
+                        <li>Job type: {{ job.job_type }}</li>
+                        <li>Qualification: {{ job.job_qualifications }}</li>
+                        <li>Location: {{ job.job_location }}</li>
+                        <li>{{ job.date_posted }}</li>
+                        <li>By: {{ job.job_author }}</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
+
+
+<!--
+
+<small class="text-muted">Posted on {{job.date_posted|date:"F d, Y"}}</small>
+</div>
+<h5><a class="article-title" href="{% url 'job-detail' job.pk %}">{{job.job_title}} </a></h5>
+<p class="article-content">{{job.about_the_company|slice:"200"}} <a class="article-title" href=
+        "{% url 'job-detail' job.pk %}">show details...</a>
+    
+        -->

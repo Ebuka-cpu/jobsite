@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if job_qualification %}
+    <h3>{{ jq }} - Qualification</h3>
+
+{% for job in job_qualification %}
+    <article class="media content-section">
+           <div class="media-body">
+               <div class="article-metadata">
+                   <a class="mr-2" href="{% url 'home' %}">{{job.job_author}}</a>
+                    <small class="text-muted">Posted on {{job.date_posted|date:"F d, Y"}}</small>
+               </div>
+               <h5><a class="article-title" href="{% url 'job-detail' job.pk %}">{{job.job_title}} </a></h5>
+               <p class="article-content">{{job.about_the_company|slice:"200"}} <a class="article-title" href=
+                       "{% url 'job-detail' job.pk %}">show details...</a>
+
+           </div>
+    </article>
+{% endfor %}
+{% else %}
+    <h3>Sorry this page does not exist...</h3>
+{% endif %}
+
+{% endblock%}

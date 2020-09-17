@@ -1,0 +1,18 @@
+
+{% block content %}
+
+    {% for job in latest_jobs %}
+        <ul>
+            <a href="{% url 'job_detail' job.slug %}" > {{ job.job_title }} </a> <hr />
+        </ul>
+    {% endfor %}
+
+{% endblock %}
+
+<!--
+
+    <p class="article-content">{{job.about_the_company|slice:"200"}} <a class="article-title" href=
+                        "#">show details...</a>
+
+            </div>
+-->

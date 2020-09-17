@@ -1,0 +1,123 @@
+{% load static %}
+
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity=
+            "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+<header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home' %}">Jobsiningeria</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+
+                 <!-- Latest jobs menu -->
+            <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Latest Job
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            {% include 'jobsinnigeria/latest_jobs.html' %}
+                        <!--
+                            {% for item in category %}
+                            {% if category %}
+                                <a class="dropdown-item" href="{% url 'job_detail' item.pk  %}">{{item}}</a>
+                            {% endif %}
+                            {% endfor %}
+                        -->
+
+                        </div> 
+
+                    </li>
+
+            </ul>
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                 <form method="GET" action="{% url 'home' %}">
+                {{ filter.form }}
+                <input type="submit" class="submit" name="submit" value="search Job">
+            </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+           <br>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+              <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active bg-info">
+                    Latest Jobs
+                  </a>
+                  {% include 'jobsinnigeria/latest_jobs.html' %}
+
+             <!--      {% for item in category %}
+                                <a class="list-group-item list-group-item-action" href="{% url 'job-detail' item.pk  %}">{{item}}</a>
+                    {% endfor %} -->
+               </div>
+                <br>
+            <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active bg-info">
+                    Jobs by Location
+                  </a>
+                  <a href="{% url 'abuja' %}" class="list-group-item list-group-item-action">Abuja</a>
+                  <a href="{% url 'plateau' %}" class="list-group-item list-group-item-action">
+                      Plateau</a>
+                  <a href="{% url 'lagos' %}" class="list-group-item list-group-item-action">Lagos</a>
+                  <a href="{% url 'category' %}" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Category</a>
+            </div> <br>
+            <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active bg-info">
+                    Jobs by Qualification
+                  </a>
+                  <a href="http://localhost:8000/job_qualification/bsc/" class="list-group-item list-group-item-action">Barchelor's (BSC)</a>
+                  <a href="http://localhost:8000/category/plateau/" class="list-group-item list-group-item-action">
+                      B.ED</a>
+                  <a href="http://localhost:8000/job_qualification/hnd/" class="list-group-item list-group-item-action">Higher National Diploma (HND)</a>
+                  <a href="http://localhost:8000/category/lagos/" class="list-group-item list-group-item-action">O'Level</a>
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
