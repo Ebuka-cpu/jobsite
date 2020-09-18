@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from .models import Job, Application, Category
+from .models import Job, Application, JobCategory
 from .filters import JobFilter
 from .forms import Applyform
 
@@ -39,10 +39,25 @@ class JobDetailView(DetailView):
 """
 
 
-class JobCategoryView(ListView):
-    queryset = Job.objects.order_by('category')
-    context_object_name = 'categories'
-    template_name = 'jobsinnigeria/categories.html'
+class CategoryView(ListView):
+    model = JobCategory
+    context_object_name = "categories"
+    template_name = "jobsinnigeria/categories.html"
+
+    # queryset = Job.objects.filter(published=True)
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['jobs'] = Job.objects.all()
+        return context
+
+
+"""
+    def get_queryset(self):
+        category = JobCategory.objects.get(slug = self.request.resolver_match.kwargs.get('slug'))
+        queryset = Job.objects.filter(category=category)
+        return queryset 
+"""
 
 
 class AbujaCategoryView(ListView):
@@ -64,10 +79,15 @@ class PlateauCategoryView(ListView):
 
 
 class LatestJobView(ListView):
-    queryset = Job.objects.order_by("-date_posted")
+    queryset = Job.objects.first()
     context_object_name = 'latest_jobs'
     paginate_by = 5
     template_name = 'jobsinnigeria/latest_jobs.html'
+
+
+"""
+    I didn't touch the codes below
+"""
 
 
 def JobqualifiactionView(request, jq):
@@ -85,7 +105,7 @@ def LatestView(request, lt):
     return render(request, 'jobsinnigeria/latest_jobs.html', {'lt': lt.title, 'latest': latest})
 
 
-class ApplyView(SuccessMessageMixin, CreateView):
+class ApplyView(SuccessMessageMixin, CreateView):       # changed "ApplyForm" to "ApplyView"
     model = Application
     success_url = reverse_lazy('apply')
     template_name = 'jobsinnigeria/application_form.html'

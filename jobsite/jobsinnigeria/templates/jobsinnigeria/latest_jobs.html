@@ -1,9 +1,11 @@
 
 {% block content %}
 
+    <p>Last 5 jobs here</p>
+
     {% for job in latest_jobs %}
         <ul>
-            <a href="{% url 'job_detail' job.slug %}" > {{ job.job_title }} </a> <hr />
+            <a href="{% url 'job_detail' job.slug %}" > {{ job.job_title }} </a>
         </ul>
     {% endfor %}
 

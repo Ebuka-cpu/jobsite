@@ -8,17 +8,19 @@ from autoslug import AutoSlugField
 from tinymce.models import HTMLField
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=255)
+class JobCategory(models.Model):
+    name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', unique=True, 
+							always_update=False, default='')
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("categories", kwargs={"pk": self.pk})
+        return reverse("categories", kwargs={"slug": self.slug})
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = 'Job Categories'
 
 
 class Job(models.Model):
@@ -37,7 +39,7 @@ class Job(models.Model):
     job_requirements = HTMLField()
     website = models.URLField(max_length=250, null=True, blank=True)
     job_experience = models.CharField(max_length=250, blank=True, null=True)
-    category = models.ForeignKey(Category, max_length=20, blank=True, null=True, default="Lagos",
+    category = models.ForeignKey(JobCategory, max_length=20, blank=True, null=True, default="Lagos",
                                  on_delete = models.DO_NOTHING)
     published = models.BooleanField(default=True)
     job_qualification = models.CharField(max_length=250, blank=True, null=True, default="bsc")

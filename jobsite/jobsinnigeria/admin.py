@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Job, Category, Application
+from .models import Job, Application, JobCategory
 
 
 class JobInline(admin.StackedInline):
@@ -16,5 +16,5 @@ class JobCategoryAdmin(admin.ModelAdmin):
     inlines = [JobInline]
 
 admin.site.register(Job, JobAdmin)
-admin.site.register(Category, JobCategoryAdmin)
 admin.site.register(Application)
+admin.site.register(JobCategory, JobCategoryAdmin)
